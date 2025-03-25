@@ -21,10 +21,16 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Pages
-        uses: actions/configure-pages@v4  # Updated to latest version
+        uses: actions/configure-pages@v4  # Updated version
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2  # ✅ Correct action
+      - name: Upload artifact (fallback)
+        uses: actions/upload-artifact@v4
+        with:
+          name: github-pages
+          path: '.'
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v2
         with:
           path: '.'
 
