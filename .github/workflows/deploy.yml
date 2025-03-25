@@ -14,20 +14,19 @@ permissions:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04  # Use a stable runner
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v4  # Updated version
+      - name: Clear Runner Cache
+        run: |
+          sudo rm -rf /opt/hostedtoolcache
+          sudo rm -rf /opt/actions-runner
 
-      - name: Upload artifact (fallback)
-        uses: actions/upload-artifact@v4
-        with:
-          name: github-pages
-          path: '.'
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v2
